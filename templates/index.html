@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant List</title>
+    <link rel="stylesheet" type="text/css" href="C:\Users\lenovo\Downloads\Typeface-main\Typeface-main\static\css">
+</head>
+<body>
+    <center><h1>Zomato Restaurant Listing & Searching</h1></center>
+    
+    <!-- Search Bar -->
+    <center>
+        <form method="POST" action="{{ url_for('index') }}">
+            <input type="text" name="search_query" id="search_query" placeholder="Search by restaurant ID or name" value="{{ search_query }}">
+            <button type="submit">Search</button>
+        </form>
+    </center>
+
+    <center><h2>Search Restaurants  by Applying Filters</h2></center>
+    <!-- Filtering Options -->
+    <form method="GET" action="{{ url_for('index') }}" id="filter_form">
+        <div>
+            <label for="country">Country Code:</label>
+            <input type="number" id="country" name="country" value="{{ country }}">
+        </div>
+        <div>
+            <label for="avg_spend">Average Spend for Two People:</label>
+            <input type="number" id="avg_spend" name="avg_spend" value="{{ avg_spend }}">
+        </div>
+        <div>
+            <label for="cuisines">Cuisines:</label>
+            <input type="text" id="cuisines" name="cuisines" value="{{ cuisines }}">
+        </div>
+        <button type="submit">Filter</button>
+        <a href="{{ url_for('index') }}"><button type="button">Reset</button></a>
+    </form>
+
+    <h2>List Of Restaurants</h2>
+    <ul>
+        {% for restaurant in restaurants %}
+            <li><a href="{{ url_for('restaurant_detail', Restaurant_ID=restaurant['Restaurant_ID']) }}">{{ restaurant['Restaurant_Name'] }}</a></li>
+        {% endfor %}
+    </ul>
+    <div>
+        <a id="prev" href="{{ url_for('index', page=page-1, country=country, avg_spend=avg_spend, cuisines=cuisines, search_query=search_query) }}" {% if page == 1 %}style="visibility: hidden;"{% endif %}>Previous</a>
+        <a id="next" href="{{ url_for('index', page=page+1, country=country, avg_spend=avg_spend, cuisines=cuisines, search_query=search_query) }}" {% if restaurants|length < per_page %}style="visibility: hidden;"{% endif %}>Next</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ restaurant['Restaurant_Name'] }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>{{ restaurant['Restaurant_Name'] }}</h1>
+    <p><strong>Address:</strong> {{ restaurant['Address'] }}</p>
+    <p><strong>City:</strong> {{ restaurant['City'] }}</p>
+    <p><strong>Locality:</strong> {{ restaurant['Locality'] }}</p>
+    <p><strong>Verbose Locality:</strong> {{ restaurant['Locality_Verbose'] }}</p>
+    <p><strong>Cuisines:</strong> {{ restaurant['Cuisines'] }}</p>
+    <p><strong>Average Cost for Two:</strong> {{ restaurant['Average_Cost_for_two'] }} {{ restaurant['Currency'] }}</p>
+    <p><strong>Rating:</strong> {{ restaurant['Aggregate_rating'] }} ({{ restaurant['Rating_text'] }})</p>
+    <p><strong>Votes:</strong> {{ restaurant['Votes'] }}</p>
+    <a id="back" href="{{ url_for('index') }}">Back to list</a>
+</body>
+</html>
